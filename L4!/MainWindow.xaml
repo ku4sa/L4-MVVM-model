@@ -1,0 +1,82 @@
+﻿<Window x:Class="L4_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:L4_"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="1200">
+
+    <Grid Background="#FFF1F137">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="9*"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height ="*"/>
+
+        </Grid.RowDefinitions>
+
+        <Border Grid.ColumnSpan="5" Background="#FFF1F137" BorderBrush="#FF7E7B7B" Padding="0" BorderThickness="3" ></Border>
+
+        <TextBlock Grid.Column="4" Text="Действия" FontSize="16" HorizontalAlignment="Center" FontFamily="Gill Sans Ultra Bold" Foreground="#FF0B187C" FontWeight="Normal" FontStyle="Normal" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="0" Text="В очереди" FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,0" FontFamily="Gill Sans Ultra Bold" Foreground="#FF0B187C" FontWeight="Normal" FontStyle="Normal" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="1" Text="Выполняются" FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,0" FontFamily="Gill Sans Ultra Bold" Foreground="#FF0B187C" FontWeight="Normal" FontStyle="Normal" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="2" Text="Завершенные" FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,0" FontFamily="Gill Sans Ultra Bold" Foreground="#FF0B187C" FontWeight="Normal" FontStyle="Normal" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="3" Text="Не хватило времени" FontSize="16" HorizontalAlignment="Center" Margin="0,0,0,0" FontFamily="Gill Sans Ultra Bold" Foreground="#FF0B187C" FontWeight="Normal" FontStyle="Normal" VerticalAlignment="Center"/>
+
+        <StackPanel Grid.Column="4" Grid.Row ="1" Background="#FF0B187C">
+
+
+            <Button Content="Добавить процесс" Height="41" FontSize="15" Click="Create_Procces" Background="#FF0B187C" FontFamily="Gill Sans Ultra Bold" Foreground="#FFF1F137" BorderBrush="White"/>
+            <StackPanel x:Name="Add" Orientation="Horizontal"  Visibility="Collapsed">
+                <StackPanel x:Name="add_labels" HorizontalAlignment="Stretch" Background="#FF8B8B8B">
+                    <TextBlock Text="Имя процесса:" HorizontalAlignment="Left" FontSize="15"></TextBlock>
+                    <TextBlock Text="Размер(байт):" HorizontalAlignment="Left" FontSize="15"></TextBlock>
+                    <TextBlock Text="Время ожидания(сек):" HorizontalAlignment="Left" FontSize="15"></TextBlock>
+                    <TextBlock Text="Время выполнения(сек):" HorizontalAlignment="Left" FontSize="15"></TextBlock>
+                </StackPanel>
+                <StackPanel  HorizontalAlignment="Center" Width="70">
+                    <TextBox x:Name="pr_name" FontSize="14"></TextBox>
+                    <TextBox x:Name="pr_size" FontSize="14" ></TextBox>
+                    <TextBox x:Name="pr_wait" FontSize="14" ></TextBox>
+                    <TextBox x:Name="pr_run" FontSize="14" ></TextBox>
+                </StackPanel>
+            </StackPanel>
+            <Button Content="Изменить объем памяти" Margin="0,0,0,0" Height="41" FontSize="15" Click="ChangeMemory_Click" Background="#FF0B187C" FontFamily="Gill Sans Ultra Bold" Foreground="#FFF1F137" BorderBrush="White"/>
+            <TextBox x:Name="set_memory" FontSize="14" Visibility="Collapsed"></TextBox>
+            <Button Content="Запустить моделирование" Margin="0,0,0,0" Height="41" FontSize="15" Click="Run" Background="#FF0B187C" FontFamily="Gill Sans Ultra Bold" Foreground="#FFF1F137" BorderBrush="White"/>
+            <Button Content="Остановить моделирование" Margin="0,0,0,0" Height="41" FontSize="15" Click="Stop" Background="#FF0B187C" FontFamily="Gill Sans Ultra Bold" Foreground="#FFF1F137" BorderBrush="White"/>
+            <Button Content="Отчистить" Height="41" FontSize="15" Click="Clear" Background="#FF0B187C" FontFamily="Gill Sans Ultra Bold" Foreground="#FFF1F137" BorderBrush="White"/>
+            <Button Content="Выход" Height="41" FontSize="15" Click="Close" Background="#FF0B187C" FontFamily="Gill Sans Ultra Bold" Foreground="#FFF1F137" BorderBrush="White"/>
+
+        </StackPanel>
+        <ListBox Grid.Column="0" Grid.Row ="1" d:ItemsSource="{d:SampleData ItemCount=20}" ItemsSource="{Binding List}" Background="#FF67A3DA" FontFamily="Courier New" BorderBrush="#FF61677A" Foreground="Black" FontWeight="Bold"/>
+        <ListBox Grid.Column="1" Grid.Row ="1" d:ItemsSource="{d:SampleData ItemCount=20}" ItemsSource="{Binding Active}" Background="#FF67A3DA" FontFamily="Courier New" BorderBrush="#FF61677A" Foreground="Black" FontWeight="Bold"/>
+        <ListBox Grid.Column="2" Grid.Row ="1" d:ItemsSource="{d:SampleData ItemCount=20}" ItemsSource="{Binding Results}" Background="#FF67A3DA" FontFamily="Courier New" BorderBrush="#FF61677A" Foreground="Black" FontWeight="Bold"/>
+        <ListBox Grid.Column="3" Grid.Row ="1" d:ItemsSource="{d:SampleData ItemCount=20}" ItemsSource="{Binding No_Results}" Background="#FF67A3DA" FontFamily="Courier New" BorderBrush="#FF61677A" Foreground="Black" FontWeight="Bold"/>
+
+
+
+
+
+        <TextBlock  Text ="Объем памяти:" Grid.Row ="2" Grid.Column="4"  FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,0" FontFamily="Gill Sans Ultra Bold" Foreground="#FF0B187C" FontWeight="Normal" FontStyle="Normal" Background="#FFF1F137" VerticalAlignment="Center"/>
+        <TextBlock  Text="Используемая память: " Grid.Row ="2" Grid.Column="1" FontSize="15" HorizontalAlignment="Center" FontFamily="Gill Sans Ultra Bold" Foreground="#FF0B187C" Background="#FFF1F137" Width="192" VerticalAlignment="Center"/>
+        <TextBlock  Text="Свободная память: " Grid.Row ="2" Grid.Column="2" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,0" FontFamily="Gill Sans Ultra Bold" Foreground="#FF0B187C" Background="#FFF1F137" VerticalAlignment="Center"/>
+        <TextBlock  Text="Прошедшее время" Grid.Row ="2" Grid.Column="3" FontSize="15" FontFamily="Gill Sans Ultra Bold" Foreground="#FF0B187C" Background="#FFF1F137" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+        <Border Grid.Row ="3" Grid.ColumnSpan="5" Background="#FF0B187C"/>
+
+        <TextBlock Grid.Row ="3" Grid.Column="4" Text="{Binding Path = All_Memory}" FontSize="20" HorizontalAlignment="Center" Foreground="#FFF1F137" Margin="23,0,0,0"/>
+        <TextBlock Grid.Row ="3" Grid.Column="1" Text="{Binding Path = Use_Memory}" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="#FFF1F137"/>
+        <TextBlock x:Name="free_memory" Grid.Row ="3" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="#FFF1F137"/>
+        <TextBlock x:Name="Tim" Grid.Row ="3"  Grid.Column="3" Text="" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="#FFF1F137"/>
+
+    </Grid>
+</Window>
